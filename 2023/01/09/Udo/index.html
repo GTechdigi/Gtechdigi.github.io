@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>搞了一个数据质量监控软件 | Gtech</title><meta name="author" content="Gtechdigi"><meta name="copyright" content="Gtechdigi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="搞了一个数据质量监控软件场景： 1、数据从mysql定时同步到es或者其他数据源，但是时不时总是数据不一致，并且问题的发现很滞后 2、业务突然减少或者突然增多，想及时发现 3、数据仓库计算指标是否正确，想做一些验证 4、需要时不时的导出一些数据给开发，给领导，给客户，明明写sql就可以，但是每次都要找对应的开发者，开发很烦恼；或者干脆要各个业务各自开发成功能，还要不停迭代 ……  推荐一种解决方案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搞了一个数据质量监控软件">
+<meta property="og:url" content="http://example.com/2023/01/09/Udo/index.html">
+<meta property="og:site_name" content="Gtech">
+<meta property="og:description" content="搞了一个数据质量监控软件场景： 1、数据从mysql定时同步到es或者其他数据源，但是时不时总是数据不一致，并且问题的发现很滞后 2、业务突然减少或者突然增多，想及时发现 3、数据仓库计算指标是否正确，想做一些验证 4、需要时不时的导出一些数据给开发，给领导，给客户，明明写sql就可以，但是每次都要找对应的开发者，开发很烦恼；或者干脆要各个业务各自开发成功能，还要不停迭代 ……  推荐一种解决方案">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gtechdigi.cn/favicon.ico">
+<meta property="article:published_time" content="2023-01-09T09:48:10.000Z">
+<meta property="article:modified_time" content="2023-05-19T09:48:48.586Z">
+<meta property="article:author" content="Gtechdigi">
+<meta property="article:tag" content="data">
+<meta property="article:tag" content="udo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gtechdigi.cn/favicon.ico"><link rel="shortcut icon" href="https://www.gtechdigi.cn/favicon.ico"><link rel="canonical" href="http://example.com/2023/01/09/Udo/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '搞了一个数据质量监控软件',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-19 17:48:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://www.gtechdigi.cn/favicon.ico" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.gtechdigi.cn/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Gtech"><img class="site-icon" src="https://www.gtechdigi.cn/_nuxt/img/logo.ae1c073.png"/></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.gtechdigi.cn/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">搞了一个数据质量监控软件</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-01-09T09:48:10.000Z" title="发表于 2023-01-09 17:48:10">2023-01-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-19T09:48:48.586Z" title="更新于 2023-05-19 17:48:48">2023-05-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/data/">data</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="搞了一个数据质量监控软件"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h2 id="搞了一个数据质量监控软件"><a href="#搞了一个数据质量监控软件" class="headerlink" title="搞了一个数据质量监控软件"></a>搞了一个数据质量监控软件</h2><h3 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h3><ul>
+<li>1、数据从mysql定时同步到es或者其他数据源，但是时不时总是数据不一致，并且问题的发现很滞后</li>
+<li>2、业务突然减少或者突然增多，想及时发现</li>
+<li>3、数据仓库计算指标是否正确，想做一些验证</li>
+<li>4、需要时不时的导出一些数据给开发，给领导，给客户，明明写sql就可以，但是每次都要找对应的开发者，开发很烦恼；或者干脆要各个业务各自开发成功能，还要不停迭代</li>
+<li>……</li>
+</ul>
+<h3 id="推荐一种解决方案："><a href="#推荐一种解决方案：" class="headerlink" title="推荐一种解决方案："></a>推荐一种解决方案：</h3><p> 开源项目 <strong>有度·UDO</strong><br> <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/07324f68f82a4f0cb992f137f826e33e~tplv-k3u1fbpfcp-watermark.image" alt="udo.png"></p>
+<p> UDO数据监控是一款对数据同步、数据生成、数据预测做出监控的开源软件，是一个前后端分离的web项目。附上链接： <a target="_blank" rel="noopener" href="https://github.com/GTechdigi/udo">UDO后端</a> +  <a target="_blank" rel="noopener" href="https://github.com/GTechdigi/udo-web">UDO前端</a></p>
+<p> 只要写sql即可解决上述的场景问题。</p>
+<h4 id="功能支持"><a href="#功能支持" class="headerlink" title="功能支持"></a>功能支持</h4><ul>
+<li>域帐号&#x2F;非域帐号登录</li>
+<li>添加数据源<ul>
+<li>支持mysql, es, hive, clickhouse数据源</li>
+</ul>
+</li>
+<li>对数据源数据做监控<ul>
+<li>及时性监控: 预测数据记录数<ul>
+<li>比如: 我们预测每日订单数不少于10000单, 少于10000单就报警</li>
+</ul>
+</li>
+<li>数据同步监控: 监控数据同步任务是否成功执行<ul>
+<li>比如: mysql同步数据到es, 可以监控每天mysql产生的数据记录数量于es中新增的数据记录数量相同</li>
+</ul>
+</li>
+<li>一致性监控: 监控数据是否一致<ul>
+<li>比如: mysql订单表同步数据到es后, 可以监控mysql新增的订单总GMV和es中新增的订单总GMV是否相同</li>
+</ul>
+</li>
+<li>业务监控: 根据指定的查询导出业务数据,并发送邮件或企业微信通知<ul>
+<li>比如: 每小时查询一次创建失败的订单, 导出并发送邮件或企业微信通知</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>定时执行监控任务</li>
+<li>支持监控报警:<ul>
+<li>支持企业微信群聊机器人报警, 支持邮件报警(邮件要自己实现)</li>
+</ul>
+</li>
+<li>用户管理</li>
+<li>项目管理</li>
+<li>权限管理</li>
+</ul>
+<h3 id="举例："><a href="#举例：" class="headerlink" title="举例："></a>举例：</h3><ul>
+<li><p>场景1：数据同步监控，监控内置count，同步完成的数据记录数一致</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 原数据库</span><br><span class="line">select id from msyql_table where create_time &gt;= curdate()</span><br><span class="line"># 目标数据库 es _xpack插件支持 sql, 对sql函数的支持，es7.x及之后的版本更好</span><br><span class="line">select id from es_index where create_time &gt;= CURRENT_DATE()</span><br></pre></td></tr></table></figure>
+<p>  如果结果不一样，会触发报警</p>
+</li>
+<li><p>场景2：数据及时性监控，监控内置count</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 统计一小时内数据，可以在页面设置sql结果必须大于1000，及时性监控内置count</span><br><span class="line">select id from msyql_table where create_time &gt;= date_sub(now(), interval 1 hour)</span><br></pre></td></tr></table></figure>
+<p>  如果结果小于1000,则会触发报警</p>
+</li>
+<li><p>场景3：数据一致性监控</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 比对昨天的统计数据结果是否一致</span><br><span class="line"># 原数据库</span><br><span class="line">select shop_code, count(1) as coun from mysql_table where create_time &lt;  curdate() and create_time &gt;= date_sub(curdate(), interval 1 day) group by shop_code</span><br><span class="line"># 目标数据库 比如： HIVE</span><br><span class="line">select shop_code, table_count from ads_table where and dt = date_add(from_unixtime(unix_timestamp(),&#x27;yyyy-MM-dd&#x27;),-1) group by shop_code</span><br></pre></td></tr></table></figure>
+<p>  如果不一致，会报警，得出结果，类似如下格式：</p>
+<table>
+<thead>
+<tr>
+<th align="left">原始表shop_code</th>
+<th align="left">原始表coun</th>
+<th align="left">目标表shop_code</th>
+<th align="left">目标表table_count</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">001</td>
+<td align="left">1000</td>
+<td align="left">001</td>
+<td align="left">N&#x2F;A</td>
+</tr>
+<tr>
+<td align="left">002</td>
+<td align="left">5000</td>
+<td align="left">002</td>
+<td align="left">5000</td>
+</tr>
+<tr>
+<td align="left">003</td>
+<td align="left">4000</td>
+<td align="left">003</td>
+<td align="left">3500</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>场景4：业务监控</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select id, name, age from mysql_table where xxxxx</span><br></pre></td></tr></table></figure>
+<p>  会将查询结果上传到阿里云OSS，并提供下载链接，可以在企业微信或邮件中看到链接</p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Gtechdigi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/01/09/Udo/">http://example.com/2023/01/09/Udo/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Gtech</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/data/">data</a><a class="post-meta__tags" href="/tags/udo/">udo</a></div><div class="post_share"><div class="social-share" data-image="https://www.gtechdigi.cn/favicon.ico" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/27/Chatgpt-Help-Android/" title="用ChatGPT提高开发效率（Android）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">用ChatGPT提高开发效率（Android）</div></div></a></div><div class="next-post pull-right"><a href="/2022/09/06/Kubernetes-pod/" title="Kubernetes-pod"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Kubernetes-pod</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://www.gtechdigi.cn/favicon.ico" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gtechdigi</div><div class="author-info__description">以消费者为中心，以技术为驱动，满足多行业数字化融合需求。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/GTechdigi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GTechdigi" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%9E%E4%BA%86%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E8%B4%A8%E9%87%8F%E7%9B%91%E6%8E%A7%E8%BD%AF%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">搞了一个数据质量监控软件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">场景：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E4%B8%80%E7%A7%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">推荐一种解决方案：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E6%94%AF%E6%8C%81"><span class="toc-number">1.2.1.</span> <span class="toc-text">功能支持</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">举例：</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/10/OpenTelemetry-javaagent/" title="OpenTelemetry javaagent 类加载器">OpenTelemetry javaagent 类加载器</a><time datetime="2023-05-10T09:56:17.000Z" title="发表于 2023-05-10 17:56:17">2023-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/07/Jetpack-Compose/" title="Jetpack Compose初体验">Jetpack Compose初体验</a><time datetime="2023-04-07T09:55:11.000Z" title="发表于 2023-04-07 17:55:11">2023-04-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/31/FlutterBoost-in-IOS/" title="iOS工程调用Flutter篇（FlutterBoost框架）">iOS工程调用Flutter篇（FlutterBoost框架）</a><time datetime="2023-03-31T09:54:07.000Z" title="发表于 2023-03-31 17:54:07">2023-03-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/30/Flutter-in-IOS/" title="iOS工程内嵌Flutter篇">iOS工程内嵌Flutter篇</a><time datetime="2023-03-30T09:53:21.000Z" title="发表于 2023-03-30 17:53:21">2023-03-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/30/FlutterBoost-in-Android/" title="Android工程调用Flutter篇（FlutterBoost框架）">Android工程调用Flutter篇（FlutterBoost框架）</a><time datetime="2023-03-30T09:52:14.000Z" title="发表于 2023-03-30 17:52:14">2023-03-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Gtechdigi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

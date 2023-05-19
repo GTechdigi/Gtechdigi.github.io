@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>用ChatGPT提高开发效率（Android） | Gtech</title><meta name="author" content="Gtechdigi"><meta name="copyright" content="Gtechdigi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、前言我们问了10个问题，开发的、生活中有疑问的，ChartGPT都给了我们答案。这些答案怎么样，请往下看吧。  ChatGPT-1、写一个车牌号的正则表达式   ChatGPT-2、写一个中国大陆车牌号的正则表达式   ChatGPT-3、用kotlin写一个车牌号的校验函数   ChatGPT-4、用Kotlin写一个String装换成金额的扩展函数   ChatGPT-5、用Kotlin写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用ChatGPT提高开发效率（Android）">
+<meta property="og:url" content="http://example.com/2023/03/27/Chatgpt-Help-Android/index.html">
+<meta property="og:site_name" content="Gtech">
+<meta property="og:description" content="一、前言我们问了10个问题，开发的、生活中有疑问的，ChartGPT都给了我们答案。这些答案怎么样，请往下看吧。  ChatGPT-1、写一个车牌号的正则表达式   ChatGPT-2、写一个中国大陆车牌号的正则表达式   ChatGPT-3、用kotlin写一个车牌号的校验函数   ChatGPT-4、用Kotlin写一个String装换成金额的扩展函数   ChatGPT-5、用Kotlin写">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gtechdigi.cn/favicon.ico">
+<meta property="article:published_time" content="2023-03-27T09:49:51.000Z">
+<meta property="article:modified_time" content="2023-05-19T09:50:46.859Z">
+<meta property="article:author" content="Gtechdigi">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Chatgpt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gtechdigi.cn/favicon.ico"><link rel="shortcut icon" href="https://www.gtechdigi.cn/favicon.ico"><link rel="canonical" href="http://example.com/2023/03/27/Chatgpt-Help-Android/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '用ChatGPT提高开发效率（Android）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-19 17:50:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://www.gtechdigi.cn/favicon.ico" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.gtechdigi.cn/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Gtech"><img class="site-icon" src="https://www.gtechdigi.cn/_nuxt/img/logo.ae1c073.png"/></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.gtechdigi.cn/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">用ChatGPT提高开发效率（Android）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-27T09:49:51.000Z" title="发表于 2023-03-27 17:49:51">2023-03-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-19T09:50:46.859Z" title="更新于 2023-05-19 17:50:46">2023-05-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI/">AI</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI/Android/">Android</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="用ChatGPT提高开发效率（Android）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h4 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h4><p>我们问了10个问题，开发的、生活中有疑问的，ChartGPT都给了我们答案。这些答案怎么样，请往下看吧。</p>
+<ul>
+<li>ChatGPT-1、写一个车牌号的正则表达式  </li>
+<li>ChatGPT-2、写一个中国大陆车牌号的正则表达式  </li>
+<li>ChatGPT-3、用kotlin写一个车牌号的校验函数  </li>
+<li>ChatGPT-4、用Kotlin写一个String装换成金额的扩展函数  </li>
+<li>ChatGPT-5、用Kotlin写一个String装换成人民币的扩展函数  </li>
+<li>ChatGPT-6、用Kotlin写一个String转换成人民币的扩展函数  </li>
+<li>ChatGPT-7、用Kotlin写一个将TextView的文本内容复制到粘贴板的扩展函数  </li>
+<li>ChatGPT-8、美食探店怎么做？  </li>
+<li>ChatGPT-9、台湾卤肉饭？  </li>
+<li>ChatGPT-10、牛皮弃面馆(柏庐南路店)</li>
+</ul>
+<h4 id="二、ChatGPT使用初体验"><a href="#二、ChatGPT使用初体验" class="headerlink" title="二、ChatGPT使用初体验"></a>二、ChatGPT使用初体验</h4><p><strong>ChatGPT-1、写一个车牌号的正则表达式</strong><br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2e128f0f011e4b0a80955855cba2f408~tplv-k3u1fbpfcp-watermark.image" alt="企业微信截图_16796251027919.png"></p>
+<p><strong>ChatGPT-2、写一个中国大陆车牌号的正则表达式</strong><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f150ab2ffb6d44d39072cfab46edc24c~tplv-k3u1fbpfcp-watermark.image" alt="企业微信截图_1679625500776.png"><br><code>^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼][A-HJ-NP-Z](?!DD)[A-HJ-NP-Z0-9]&#123;4&#125;[A-HJ-NP-Z0-9挂学警港澳]$</code></p>
+<p><strong>ChatGPT-3、用kotlin写一个车牌号的校验函数</strong><br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b72d778d96da49dd872ff10651ebe9a1~tplv-k3u1fbpfcp-watermark.image" alt="企业微信截图_16796251209911.png"></p>
+<h4 id="三、ChatGPT-PK-5年-年程序员"><a href="#三、ChatGPT-PK-5年-年程序员" class="headerlink" title="三、ChatGPT PK 5年+年程序员"></a>三、ChatGPT <strong>PK</strong> 5年+年程序员</h4><p><strong>ChatGPT-4、用Kotlin写一个String装换成金额的扩展函数</strong><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/00ccea95d6d74c1b85ab1acb808129ad~tplv-k3u1fbpfcp-watermark.image" alt="企业微信截图_16796251209911.png"></p>
+<p><strong>ChatGPT-5、用Kotlin写一个String装换成人民币的扩展函数</strong><br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/160189f0ae004c2bbb4b1a214c3b0836~tplv-k3u1fbpfcp-watermark.image" alt="企业微信截图_16796251209911.png"></p>
+<p><strong>ChatGPT-6、用Kotlin写一个String转换成人民币的扩展函数</strong><br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4a2fce7fa2c4b3eae64a7515df0040a~tplv-k3u1fbpfcp-watermark.image" alt="1111.png"><br><strong>PK</strong><br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/03cefaaf046d4c1bad6635bbdff873d6~tplv-k3u1fbpfcp-watermark.image" alt="image2023-3-24_11-2-10.png"></p>
+<p><strong>ChatGPT-7、用Kotlin写一个将TextView的文本内容复制到粘贴板的扩展函数</strong><br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4c13c506f1b7454395e73ea3d59e9e1a~tplv-k3u1fbpfcp-watermark.image" alt="image2023-3-24_11-2-10.png"><br><strong>PK</strong><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aa5a7774831d47bea356b55c9377b6d6~tplv-k3u1fbpfcp-watermark.image" alt="image2023-3-24_11-3-0.png"></p>
+<h4 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h4><p>ChatGPT-1、写一个车牌号的正则表达式<br>ChatGPT-2、写一个中国大陆车牌号的正则表达式<br>ChatGPT-3、用kotlin写一个车牌号的校验函数</p>
+<p><strong>以上问题，明确的告诉了我们答案，并且配上了讲解和使用方法。</strong></p>
+<p><strong>极大的减少了我们自己写正则的错误概率，或者网上查，答案质量参差不齐的筛选验证的烦恼。</strong></p>
+<p><strong>对这种重复劳动、通用的功能函数，ChatGPT很好用</strong></p>
+<p><em>ChatGPT-4、用Kotlin写一个String装换成金额的扩展函数<br>ChatGPT-5、用Kotlin写一个String装换成人民币的扩展函数<br>ChatGPT-6、用Kotlin写一个String转换成人民币的扩展函数<br>ChatGPT-7、用Kotlin写一个将TextView的文本内容复制到粘贴板的扩展函数</em></p>
+<p><strong>以上问题，实现了在开发过程中实际的问题，直接Copy就可以使用</strong></p>
+<p><strong>请注意我的问题，用Kotlin写一个String转换成人民币的扩展函数，只要你问题问的明确，ChatGPT就会给你想要的答案</strong></p>
+<p><strong>ChatGPT-4、ChatGPT-5转换写错了，写成了装换，ChatGPT理解了我的意思，并且他自我纠正了</strong></p>
+<p><strong>ChatGPT-6、ChatGPT-7，ChatGPT与5年+程序员的PK，功能都实现了，实现思路基本相同。但是5+程序员写的更简洁，自由</strong> <strong>（程序员的个人素质了，Lewis对个人要求标准较高，这就是通往大佬的之路）。</strong></p>
+<p><strong>你在通往IT大佬的路上，不要轻视ChatGPT哦，我们使用的ChatGPT是通用版，训练出来的模型是面向所有用户的。</strong></p>
+<p><strong>一个假设，如果使用Githut上所有的代码训练ChatGPT，训练出来的模型还会比不过5年的程序员吗？Githut+ChatGPT好像都为微软的，这个假设可能已经在实验室阶段了。</strong></p>
+<p><strong>以上假设已经有了，<a target="_blank" rel="noopener" href="https://github.blog/2023-03-22-github-copilot-x-the-ai-powered-developer-experience/">GitHub Copilot X </a>，<a target="_blank" rel="noopener" href="https://juejin.cn/post/7213335620126982202">GitHub + GPT-4联手的产品</a></strong></p>
+<h4 id="五、ChatGPT最后的胡说八道"><a href="#五、ChatGPT最后的胡说八道" class="headerlink" title="五、ChatGPT最后的胡说八道"></a>五、ChatGPT最后的胡说八道</h4><p><strong>ChatGPT-8、美食探店怎么做？</strong><br><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/df543b360ffd4a10928cd309cf0bc2d4~tplv-k3u1fbpfcp-watermark.image" alt="企业微信截图_16796255651978.png"></p>
+<p><strong>ChatGPT-9、台湾卤肉饭？</strong><br><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1bea338d642e4078b6c0fd361f4ea8d7~tplv-k3u1fbpfcp-watermark.image" alt="企业微信截图_16796256304717.png"></p>
+<p><strong>ChatGPT-10、牛皮弃面馆(柏庐南路店)</strong><br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/71c59f419cbe4a2894fded7355ac6b16~tplv-k3u1fbpfcp-watermark.image" alt="企业微信截图_1679625678718.png"></p>
+<p><em>ChatGPT-8、美食探店怎么做？<br>ChatGPT-9、台湾卤肉饭？<br>ChatGPT-10、牛皮弃面馆(柏庐南路店)</em></p>
+<p><strong>以上问题，初一看ChatGPT回答的很专业，以下详细说一下</strong></p>
+<p><strong>ChatGPT-8、ChatGPT-9，很多人都有疑问的问题，网上资料很多，回答的很专业，也很有条理，挺好。作为一个技术就不都说了，可以看看这个<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Y1LUxcIndCz15Yh1N6wxiQ">「打不过，就加入」，我和ChatGPT的故事</a></strong></p>
+<p><strong>ChatGPT-10，昆山一家小店，没有名气，主打台湾牛肉面和台湾小吃，ChatGPT就开始胡说八道了，但是显得很专业，他谈的模板就是按照逻辑去介绍一家店。如果你问他一家有名的店或者连锁店（例如：海底捞），他会回答的应该很专业。</strong></p>
+<p>其实还有很多疑问的，移动开发未来前景怎么样？ETH今天会不会大跌，短线做空可以吗？，但是毕竟今天周五了，让自己过一个愉快的周末吧^_^。</p>
+<h4 id="六、延伸阅读"><a href="#六、延伸阅读" class="headerlink" title="六、延伸阅读"></a>六、延伸阅读</h4><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/PyH2SzFQ9lAzu4CO4KFhIQ">https://mp.weixin.qq.com/s/PyH2SzFQ9lAzu4CO4KFhIQ</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7211775653165989947">https://juejin.cn/post/7211775653165989947</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7197675335802388539">https://juejin.cn/post/7197675335802388539</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/prXyAUf_8kI8w21soCWdoQ">https://mp.weixin.qq.com/s/prXyAUf_8kI8w21soCWdo</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Y1LUxcIndCz15Yh1N6wxiQ">https://mp.weixin.qq.com/s/Y1LUxcIndCz15Yh1N6wxiQ</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/a3xZZLRgD3IDiLmSlzM0Lg">https://mp.weixin.qq.com/s/a3xZZLRgD3IDiLmSlzM0Lg</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Gtechdigi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/27/Chatgpt-Help-Android/">http://example.com/2023/03/27/Chatgpt-Help-Android/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Gtech</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Android/">Android</a><a class="post-meta__tags" href="/tags/Chatgpt/">Chatgpt</a></div><div class="post_share"><div class="social-share" data-image="https://www.gtechdigi.cn/favicon.ico" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/29/Flutter-in-Android/" title="Android工程内嵌Flutter篇"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Android工程内嵌Flutter篇</div></div></a></div><div class="next-post pull-right"><a href="/2023/01/09/Udo/" title="搞了一个数据质量监控软件"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">搞了一个数据质量监控软件</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/06/28/Android-new-Architecture-MVI/" title="Android全新架构-MVI"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-28</div><div class="title">Android全新架构-MVI</div></div></a></div><div><a href="/2023/03/29/Flutter-in-Android/" title="Android工程内嵌Flutter篇"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-29</div><div class="title">Android工程内嵌Flutter篇</div></div></a></div><div><a href="/2023/03/30/FlutterBoost-in-Android/" title="Android工程调用Flutter篇（FlutterBoost框架）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-30</div><div class="title">Android工程调用Flutter篇（FlutterBoost框架）</div></div></a></div><div><a href="/2023/04/07/Jetpack-Compose/" title="Jetpack Compose初体验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-07</div><div class="title">Jetpack Compose初体验</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://www.gtechdigi.cn/favicon.ico" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gtechdigi</div><div class="author-info__description">以消费者为中心，以技术为驱动，满足多行业数字化融合需求。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/GTechdigi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GTechdigi" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81ChatGPT%E4%BD%BF%E7%94%A8%E5%88%9D%E4%BD%93%E9%AA%8C"><span class="toc-number">2.</span> <span class="toc-text">二、ChatGPT使用初体验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81ChatGPT-PK-5%E5%B9%B4-%E5%B9%B4%E7%A8%8B%E5%BA%8F%E5%91%98"><span class="toc-number">3.</span> <span class="toc-text">三、ChatGPT PK 5年+年程序员</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">四、总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81ChatGPT%E6%9C%80%E5%90%8E%E7%9A%84%E8%83%A1%E8%AF%B4%E5%85%AB%E9%81%93"><span class="toc-number">5.</span> <span class="toc-text">五、ChatGPT最后的胡说八道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%BB%B6%E4%BC%B8%E9%98%85%E8%AF%BB"><span class="toc-number">6.</span> <span class="toc-text">六、延伸阅读</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/10/OpenTelemetry-javaagent/" title="OpenTelemetry javaagent 类加载器">OpenTelemetry javaagent 类加载器</a><time datetime="2023-05-10T09:56:17.000Z" title="发表于 2023-05-10 17:56:17">2023-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/07/Jetpack-Compose/" title="Jetpack Compose初体验">Jetpack Compose初体验</a><time datetime="2023-04-07T09:55:11.000Z" title="发表于 2023-04-07 17:55:11">2023-04-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/31/FlutterBoost-in-IOS/" title="iOS工程调用Flutter篇（FlutterBoost框架）">iOS工程调用Flutter篇（FlutterBoost框架）</a><time datetime="2023-03-31T09:54:07.000Z" title="发表于 2023-03-31 17:54:07">2023-03-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/30/Flutter-in-IOS/" title="iOS工程内嵌Flutter篇">iOS工程内嵌Flutter篇</a><time datetime="2023-03-30T09:53:21.000Z" title="发表于 2023-03-30 17:53:21">2023-03-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/30/FlutterBoost-in-Android/" title="Android工程调用Flutter篇（FlutterBoost框架）">Android工程调用Flutter篇（FlutterBoost框架）</a><time datetime="2023-03-30T09:52:14.000Z" title="发表于 2023-03-30 17:52:14">2023-03-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Gtechdigi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

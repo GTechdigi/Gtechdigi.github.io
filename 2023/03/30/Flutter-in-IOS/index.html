@@ -1,0 +1,216 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>iOS工程内嵌Flutter篇 | Gtech</title><meta name="author" content="Gtechdigi"><meta name="copyright" content="Gtechdigi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="概述使用Flutter从零开始开发App是一件轻松惬意的事情，但对于一些成熟的产品来说，完全摒弃原有App的历史沉淀，全面转向Flutter是有难度的。 因此使用Flutter去统一Android、iOS技术栈，把它作为已有原生App的扩展能力，通过有序推进来提升移动终端的开发效率。  目前Flutter开发形式一般是两种： 1、统一办理形式：适用于创立Flutter工程来办理多端（ios、and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS工程内嵌Flutter篇">
+<meta property="og:url" content="http://example.com/2023/03/30/Flutter-in-IOS/index.html">
+<meta property="og:site_name" content="Gtech">
+<meta property="og:description" content="概述使用Flutter从零开始开发App是一件轻松惬意的事情，但对于一些成熟的产品来说，完全摒弃原有App的历史沉淀，全面转向Flutter是有难度的。 因此使用Flutter去统一Android、iOS技术栈，把它作为已有原生App的扩展能力，通过有序推进来提升移动终端的开发效率。  目前Flutter开发形式一般是两种： 1、统一办理形式：适用于创立Flutter工程来办理多端（ios、and">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gtechdigi.cn/favicon.ico">
+<meta property="article:published_time" content="2023-03-30T09:53:21.000Z">
+<meta property="article:modified_time" content="2023-05-19T09:54:00.123Z">
+<meta property="article:author" content="Gtechdigi">
+<meta property="article:tag" content="IOS">
+<meta property="article:tag" content="Flutter">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gtechdigi.cn/favicon.ico"><link rel="shortcut icon" href="https://www.gtechdigi.cn/favicon.ico"><link rel="canonical" href="http://example.com/2023/03/30/Flutter-in-IOS/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'iOS工程内嵌Flutter篇',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-19 17:54:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://www.gtechdigi.cn/favicon.ico" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.gtechdigi.cn/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Gtech"><img class="site-icon" src="https://www.gtechdigi.cn/_nuxt/img/logo.ae1c073.png"/></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.gtechdigi.cn/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">iOS工程内嵌Flutter篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-30T09:53:21.000Z" title="发表于 2023-03-30 17:53:21">2023-03-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-19T09:54:00.123Z" title="更新于 2023-05-19 17:54:00">2023-05-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/IOS/">IOS</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/IOS/Flutter/">Flutter</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="iOS工程内嵌Flutter篇"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>使用Flutter从零开始开发App是一件轻松惬意的事情，但对于一些成熟的产品来说，完全摒弃原有App的历史沉淀，全面转向Flutter是有难度的。</p>
+<p>因此使用Flutter去统一Android、iOS技术栈，把它作为已有原生App的扩展能力，通过有序推进来提升移动终端的开发效率。 </p>
+<p>目前Flutter开发形式一般是两种：</p>
+<p>1、统一办理形式：适用于创立Flutter工程来办理多端（ios、android、web、desktop,等）</p>
+<p>2、三端分离形式：适用于在本来的项目中引证flutter模块，让flutter模块编译后<a target="_blank" rel="noopener" href="https://www.6hu.cc/archives/tag/%e4%ba%a7%e5%93%81">产品</a>集成在原生(ios、android、web、desktop等)项目中。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ecd0c643bae04424bf02965b1db7e831~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p><strong>本篇主要研究三端分离形式下的iOS项目集成Flutter页面</strong><br>Flutter UI组件可以作为嵌入式框架增量添加到现有的iOS应用程序中。有下面主流2种方法可以在现有应用程序中嵌入Flutter。</p>
+<p>1.为Flutter引擎、编译的Dart代码和所有Flutter插件创建框架。在这里，您手动嵌入框架，并在Xcode中更新现有应用程序的构建设置。</p>
+<p>  优点：集成使用时比较简单，集成方本地不需要安装Flutter SDK。</p>
+<p>  缺点：更新时需要手动替换SDK 比较繁琐。</p>
+<p>2.使用CocoaPods依赖管理器并安装Flutter SDK。在这种情况下，每次构建应用程序时，都会从源代码编译flatter_module。</p>
+<p>  优点：CocoaPods便于统一的第三方sdk管理，集成比较方便简单，不需要繁琐配置</p>
+<p>  缺点：使用方本地有需要安装Flutter SDK的要求。</p>
+<p>  <strong>鉴于两者互有特色，本篇都做介绍，在使用时 由读者根据具体项目场景作出取舍。</strong></p>
+<p>  开发环境：</p>
+<p>xCode版本（Version 14.2-14C18），iOS目标版本11.0以上</p>
+<p>flutter版本3.3.7 dart版本2.18.4</p>
+<h2 id="第1种手动集成方案："><a href="#第1种手动集成方案：" class="headerlink" title="第1种手动集成方案："></a><strong>第1种手动集成方案：</strong></h2><p><strong>一、创建Flutter模块</strong></p>
+<p>1.进入Terminal命令行</p>
+<p>2.选择flutter工程文件路径 cd user&#x2F;flutter&#x2F;path</p>
+<p>3.创建模版工程文件 flutter create –template module my_flutter</p>
+<p>注意：与新建单独运行的flutter有差异，命令行需要加上–template module，不然不能输出SDK</p>
+<p>此时生成的flutter工程结构如下：</p>
+<p>my_flutter&#x2F;<br>├── .ios&#x2F;<br> │   ├── Runner.xcworkspace<br> │   └── Flutter&#x2F;podhelper.rb<br>├── lib&#x2F;<br> │   └── main.dart<br>├── test&#x2F;<br>└── pubspec.yaml</p>
+<p>我们将Dart代码加至lib&#x2F;目录即可</p>
+<p><strong>二、将flutter模块集成至原生工程</strong></p>
+<p>1.进入Terminal命令行</p>
+<p>2.执行输出SDK动作  flutter build ios-framework –output&#x3D;some&#x2F;path&#x2F;MyApp&#x2F;Flutter&#x2F;  </p>
+<p>注意：这一步可能会报错，在输出前需要跑一下真机</p>
+<p>执行成功后输出如下目录：</p>
+<p>some&#x2F;path&#x2F;MyApp&#x2F;<br>└── Flutter&#x2F;<br>    ├── Debug&#x2F;<br>    │   ├── Flutter.xcframework<br>    │   ├── App.xcframework<br>    │   ├── FlutterPluginRegistrant.xcframework (only if you have plugins with iOS platform code)<br>    │   └── example_plugin.xcframework (each plugin is a separate framework)<br>    ├── Profile&#x2F;<br>    │   ├── Flutter.xcframework<br>    │   ├── App.xcframework<br>    │   ├── FlutterPluginRegistrant.xcframework<br>    │   └── example_plugin.xcframework<br>    └── Release&#x2F;<br>        ├── Flutter.xcframework<br>        ├── App.xcframework<br>        ├── FlutterPluginRegistrant.xcframework<br>        └── example_plugin.xcframework  </p>
+<p>3.将Debug文件夹和Release文件夹拷贝至iOS原生工程目录下</p>
+<p>4.打开原生工程目录，将sdk加入到<strong>Link Binary With Libraries，Build Settings &gt; Build Phases &gt; Link Binary With Libraries，</strong></p>
+<p><strong>在目标设置里，将Release文件夹放置进去</strong></p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3922de45d3984a72b671c14e817299dc~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a9946bcf9aef4b10a119b7e9f36e6793~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a4ef14272087400da787a24d0df68859~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<h2 id="第2种CocoaPods集成方案："><a href="#第2种CocoaPods集成方案：" class="headerlink" title="第2种CocoaPods集成方案："></a><strong>第2种CocoaPods集成方案：</strong></h2><p>脚本：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"># <span class="title class_">Uncomment</span> the next line to define a <span class="variable language_">global</span> platform <span class="keyword">for</span> your project</span><br><span class="line"></span><br><span class="line"># platform :ios, <span class="string">&#x27;16.0&#x27;</span></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## <span class="title class_">Flutter</span> 模块的路径</span><br><span class="line"></span><br><span class="line">flutter_application_path = <span class="string">&#x27;./my_flutter&#x27;</span></span><br><span class="line"></span><br><span class="line">load <span class="title class_">File</span>.<span class="title function_">join</span>(flutter_application_path, <span class="string">&#x27;.ios&#x27;</span>, <span class="string">&#x27;Flutter&#x27;</span>, <span class="string">&#x27;podhelper.rb&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">target <span class="string">&#x27;sw_flutter&#x27;</span> <span class="keyword">do</span></span><br><span class="line"></span><br><span class="line">  # <span class="title class_">Comment</span> the next line <span class="keyword">if</span> you don<span class="string">&#x27;t want to use dynamic frameworks</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  use_frameworks!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  install_all_flutter_pods(flutter_application_path)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">post_install do |installer|</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  flutter_post_install(installer) **if** **defined?** (flutter_post_install)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">end</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>打开命令行执行</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod install</span><br></pre></td></tr></table></figure>
+
+
+<p>成功后在工程文件的pod栏出现下图，证明导入成功</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2cfed15c50664ba194f5f7ce9826d460~tplv-k3u1fbpfcp-watermark.image" alt="image.png">
+  </p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Gtechdigi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/30/Flutter-in-IOS/">http://example.com/2023/03/30/Flutter-in-IOS/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Gtech</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IOS/">IOS</a><a class="post-meta__tags" href="/tags/Flutter/">Flutter</a></div><div class="post_share"><div class="social-share" data-image="https://www.gtechdigi.cn/favicon.ico" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/31/FlutterBoost-in-IOS/" title="iOS工程调用Flutter篇（FlutterBoost框架）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">iOS工程调用Flutter篇（FlutterBoost框架）</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/30/FlutterBoost-in-Android/" title="Android工程调用Flutter篇（FlutterBoost框架）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Android工程调用Flutter篇（FlutterBoost框架）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/03/31/FlutterBoost-in-IOS/" title="iOS工程调用Flutter篇（FlutterBoost框架）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-31</div><div class="title">iOS工程调用Flutter篇（FlutterBoost框架）</div></div></a></div><div><a href="/2022/02/28/Apollo-IOS-jicheng-md/" title="Apollo IOS 集成"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-28</div><div class="title">Apollo IOS 集成</div></div></a></div><div><a href="/2022/08/04/Flutter-Practice/" title="Flutter项目架构实践：基于蒲公英API的团队App下载安装器"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-04</div><div class="title">Flutter项目架构实践：基于蒲公英API的团队App下载安装器</div></div></a></div><div><a href="/2023/03/29/Flutter-in-Android/" title="Android工程内嵌Flutter篇"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-29</div><div class="title">Android工程内嵌Flutter篇</div></div></a></div><div><a href="/2023/03/30/FlutterBoost-in-Android/" title="Android工程调用Flutter篇（FlutterBoost框架）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-30</div><div class="title">Android工程调用Flutter篇（FlutterBoost框架）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://www.gtechdigi.cn/favicon.ico" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gtechdigi</div><div class="author-info__description">以消费者为中心，以技术为驱动，满足多行业数字化融合需求。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/GTechdigi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GTechdigi" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC1%E7%A7%8D%E6%89%8B%E5%8A%A8%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">第1种手动集成方案：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC2%E7%A7%8DCocoaPods%E9%9B%86%E6%88%90%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">第2种CocoaPods集成方案：</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/10/OpenTelemetry-javaagent/" title="OpenTelemetry javaagent 类加载器">OpenTelemetry javaagent 类加载器</a><time datetime="2023-05-10T09:56:17.000Z" title="发表于 2023-05-10 17:56:17">2023-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/07/Jetpack-Compose/" title="Jetpack Compose初体验">Jetpack Compose初体验</a><time datetime="2023-04-07T09:55:11.000Z" title="发表于 2023-04-07 17:55:11">2023-04-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/31/FlutterBoost-in-IOS/" title="iOS工程调用Flutter篇（FlutterBoost框架）">iOS工程调用Flutter篇（FlutterBoost框架）</a><time datetime="2023-03-31T09:54:07.000Z" title="发表于 2023-03-31 17:54:07">2023-03-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/30/Flutter-in-IOS/" title="iOS工程内嵌Flutter篇">iOS工程内嵌Flutter篇</a><time datetime="2023-03-30T09:53:21.000Z" title="发表于 2023-03-30 17:53:21">2023-03-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/30/FlutterBoost-in-Android/" title="Android工程调用Flutter篇（FlutterBoost框架）">Android工程调用Flutter篇（FlutterBoost框架）</a><time datetime="2023-03-30T09:52:14.000Z" title="发表于 2023-03-30 17:52:14">2023-03-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Gtechdigi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

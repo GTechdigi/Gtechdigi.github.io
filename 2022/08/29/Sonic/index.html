@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Sonic设备管理平台使用分享 | Gtech</title><meta name="author" content="Gtechdigi"><meta name="copyright" content="Gtechdigi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="背景与目标公司设备保管在开发、测试手里，其他人需要设备的时候还要跟他们要，有时候设备即使登记证在某人的名下，实际也不在他那边。APP UI、功能验收的时候，难免要看一下在各个不同手机型号、不同尺寸屏幕上的效果。通过设备管理平台，统一管理设备。需要使用设备的时候，远程连接设备、安装APK、远程操作就可以。设备管理平台，实现了Android、IOS设备的双支持。未来新的设备，会优先接入设备管理平台">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sonic设备管理平台使用分享">
+<meta property="og:url" content="http://example.com/2022/08/29/Sonic/index.html">
+<meta property="og:site_name" content="Gtech">
+<meta property="og:description" content="背景与目标公司设备保管在开发、测试手里，其他人需要设备的时候还要跟他们要，有时候设备即使登记证在某人的名下，实际也不在他那边。APP UI、功能验收的时候，难免要看一下在各个不同手机型号、不同尺寸屏幕上的效果。通过设备管理平台，统一管理设备。需要使用设备的时候，远程连接设备、安装APK、远程操作就可以。设备管理平台，实现了Android、IOS设备的双支持。未来新的设备，会优先接入设备管理平台">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gtechdigi.cn/favicon.ico">
+<meta property="article:published_time" content="2022-08-29T09:45:48.000Z">
+<meta property="article:modified_time" content="2023-05-19T10:05:14.557Z">
+<meta property="article:author" content="Gtechdigi">
+<meta property="article:tag" content="Test">
+<meta property="article:tag" content="Sonic">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gtechdigi.cn/favicon.ico"><link rel="shortcut icon" href="https://www.gtechdigi.cn/favicon.ico"><link rel="canonical" href="http://example.com/2022/08/29/Sonic/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Sonic设备管理平台使用分享',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-19 18:05:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://www.gtechdigi.cn/favicon.ico" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.gtechdigi.cn/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Gtech"><img class="site-icon" src="https://www.gtechdigi.cn/_nuxt/img/logo.ae1c073.png"/></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.gtechdigi.cn/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Sonic设备管理平台使用分享</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-29T09:45:48.000Z" title="发表于 2022-08-29 17:45:48">2022-08-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-19T10:05:14.557Z" title="更新于 2023-05-19 18:05:14">2023-05-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Sonic/">Sonic</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Sonic设备管理平台使用分享"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h3 id="背景与目标"><a href="#背景与目标" class="headerlink" title="背景与目标"></a>背景与目标</h3><p>公司设备保管在开发、测试手里，其他人需要设备的时候还要跟他们要，有时候设备即使登记证在某人的名下，实际也不在他那边。APP UI、功能验收的时候，难免要看一下在各个不同手机型号、不同尺寸屏幕上的效果。<br>通过设备管理平台，统一管理设备。需要使用设备的时候，远程连接设备、安装APK、远程操作就可以。<br>设备管理平台，实现了Android、IOS设备的双支持。未来新的设备，会优先接入设备管理平台</p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>数量（台）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Android手机</td>
+<td>11</td>
+</tr>
+<tr>
+<td>Android平板</td>
+<td>5</td>
+</tr>
+<tr>
+<td>iOS手机</td>
+<td>5</td>
+</tr>
+<tr>
+<td>iOS平板</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<h3 id="登录与注册"><a href="#登录与注册" class="headerlink" title="登录与注册"></a>登录与注册</h3><p>设备管理平台地址：http:&#x2F;&#x2F; xxx.xxx.com :3000&#x2F; <br>设备中心地址：<a target="_blank" rel="noopener" href="http://xxx.xxx.com:3000/Index/Devices">http://xxx.xxx.com:3000/Index/Devices</a> <br>平台需要注册，建议使用域账号注册，注册之后联系李XX OR 阚XX添加角色。目前角色有四种：管理员、开发、测试、设计、产品。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fcf8393771d149318fdb242ab2a605d8~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<h3 id="设备中心"><a href="#设备中心" class="headerlink" title="设备中心"></a>设备中心</h3><p>进入设备中心，可在设备列表里，选择空闲中的设备，点击马上使用。<br>设备中心展示了手机的型号、品牌、系统版本等信息。<br>如果需要使用的型号被别人占用，可与使用人联系停止使用，之后刷新页面，或者在页面上开启自动刷新。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/55533468804b42608d5326e2400a0815~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<h3 id="Android设备使用-控制面板"><a href="#Android设备使用-控制面板" class="headerlink" title="Android设备使用-控制面板"></a>Android设备使用-控制面板</h3><p>① 手机投屏和操作区</p>
+<p>② 功能切换区</p>
+<p>③ 手机输入框电脑键盘输入区</p>
+<p>④手机唤醒按钮，如果手机是黑屏状态，点击该按钮唤醒手机</p>
+<p>⑤手机左对齐和居中对齐切换</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f1e424bbec84977a6251de421b4aafd~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<h3 id="Android设备使用-应用程序安装与截屏"><a href="#Android设备使用-应用程序安装与截屏" class="headerlink" title="Android设备使用-应用程序安装与截屏"></a>Android设备使用-应用程序安装与截屏</h3><p>① 选择安装包安装</p>
+<p>② 手机截屏、保存</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/909bbfea17264e2eb6606a0a8d48fb23~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<h3 id="iOS设备使用"><a href="#iOS设备使用" class="headerlink" title="iOS设备使用"></a>iOS设备使用</h3><p>① 手机投屏和操作区</p>
+<p>② 功能切换区</p>
+<p>③选择安装包安装</p>
+<p>④手机唤醒按钮，如果手机是黑屏状态，点击该按钮唤醒手机</p>
+<p>⑤手机左对齐和居中对齐切换</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/49b2aba1ac9c4e39abed46023877306b~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<h3 id="佳应-APP"><a href="#佳应-APP" class="headerlink" title="佳应 APP"></a>佳应 APP</h3><p>佳应 APP维护了所有通过jenkins出包的APP版本，通过佳应APP即可下载相应APP。</p>
+<p>① 启动佳应APP</p>
+<p>② 选择安装的APP</p>
+<p>③ 选择环境安装</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/194acf5cef824f35b9a80bbcfdc9c588~tplv-k3u1fbpfcp-watermark.image" alt="image.png"></p>
+<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><p>Sonic部署：<br><a target="_blank" rel="noopener" href="https://sonic-cloud.gitee.io/#/Deploy">https://sonic-cloud.gitee.io/#/Deploy</a></p>
+<p>部署过程中遇到的问题：<br><a target="_blank" rel="noopener" href="https://sonic-cloud.wiki/d/1221-agent-v141-releaseandroid-device-55488f62-online/2">https://sonic-cloud.wiki/d/1221-agent-v141-releaseandroid-device-55488f62-online/2</a><br><a target="_blank" rel="noopener" href="https://sonic-cloud.wiki/d/1261-isoagentios/16">https://sonic-cloud.wiki/d/1261-isoagentios/16</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Gtechdigi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/08/29/Sonic/">http://example.com/2022/08/29/Sonic/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Gtech</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Test/">Test</a><a class="post-meta__tags" href="/tags/Sonic/">Sonic</a></div><div class="post_share"><div class="social-share" data-image="https://www.gtechdigi.cn/favicon.ico" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/09/06/Kubernetes-pod/" title="Kubernetes-pod"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Kubernetes-pod</div></div></a></div><div class="next-post pull-right"><a href="/2022/08/17/Ui-Kit-1/" title="组件库设计(一) - 一个组件库的诞生"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">组件库设计(一) - 一个组件库的诞生</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://www.gtechdigi.cn/favicon.ico" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gtechdigi</div><div class="author-info__description">以消费者为中心，以技术为驱动，满足多行业数字化融合需求。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/GTechdigi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GTechdigi" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E4%B8%8E%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">背景与目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E4%B8%8E%E6%B3%A8%E5%86%8C"><span class="toc-number">2.</span> <span class="toc-text">登录与注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E4%B8%AD%E5%BF%83"><span class="toc-number">3.</span> <span class="toc-text">设备中心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android%E8%AE%BE%E5%A4%87%E4%BD%BF%E7%94%A8-%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF"><span class="toc-number">4.</span> <span class="toc-text">Android设备使用-控制面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android%E8%AE%BE%E5%A4%87%E4%BD%BF%E7%94%A8-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%AE%89%E8%A3%85%E4%B8%8E%E6%88%AA%E5%B1%8F"><span class="toc-number">5.</span> <span class="toc-text">Android设备使用-应用程序安装与截屏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iOS%E8%AE%BE%E5%A4%87%E4%BD%BF%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">iOS设备使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%B3%E5%BA%94-APP"><span class="toc-number">7.</span> <span class="toc-text">佳应 APP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5"><span class="toc-number">8.</span> <span class="toc-text">相关链接</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/10/OpenTelemetry-javaagent/" title="OpenTelemetry javaagent 类加载器">OpenTelemetry javaagent 类加载器</a><time datetime="2023-05-10T09:56:17.000Z" title="发表于 2023-05-10 17:56:17">2023-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/07/Jetpack-Compose/" title="Jetpack Compose初体验">Jetpack Compose初体验</a><time datetime="2023-04-07T09:55:11.000Z" title="发表于 2023-04-07 17:55:11">2023-04-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/31/FlutterBoost-in-IOS/" title="iOS工程调用Flutter篇（FlutterBoost框架）">iOS工程调用Flutter篇（FlutterBoost框架）</a><time datetime="2023-03-31T09:54:07.000Z" title="发表于 2023-03-31 17:54:07">2023-03-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/30/Flutter-in-IOS/" title="iOS工程内嵌Flutter篇">iOS工程内嵌Flutter篇</a><time datetime="2023-03-30T09:53:21.000Z" title="发表于 2023-03-30 17:53:21">2023-03-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/30/FlutterBoost-in-Android/" title="Android工程调用Flutter篇（FlutterBoost框架）">Android工程调用Flutter篇（FlutterBoost框架）</a><time datetime="2023-03-30T09:52:14.000Z" title="发表于 2023-03-30 17:52:14">2023-03-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Gtechdigi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

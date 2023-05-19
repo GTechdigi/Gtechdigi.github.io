@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>组件库设计(一) - 一个组件库的诞生 | Gtech</title><meta name="author" content="Gtechdigi"><meta name="copyright" content="Gtechdigi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="随着公司业务的不断增长，组件化除了为业务带来一致的设计语言和工作效率提升外，也为设计团队的产出和协作方式带来了影响和变化。Gtech UED团队在进行需求设计的同时，也逐步沉淀出一套适用于多平台、多业务的组件库，以此来提升设计和协同效率，并最终实现专业价值和商业价值的平衡。本系列文章中，我会分享自己在整理与维护 Gtech UI Kit (Mob) 过程中一些思考与方法。今天我们先聊聊如何迈出组件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组件库设计(一) - 一个组件库的诞生">
+<meta property="og:url" content="http://example.com/2022/08/17/Ui-Kit-1/index.html">
+<meta property="og:site_name" content="Gtech">
+<meta property="og:description" content="随着公司业务的不断增长，组件化除了为业务带来一致的设计语言和工作效率提升外，也为设计团队的产出和协作方式带来了影响和变化。Gtech UED团队在进行需求设计的同时，也逐步沉淀出一套适用于多平台、多业务的组件库，以此来提升设计和协同效率，并最终实现专业价值和商业价值的平衡。本系列文章中，我会分享自己在整理与维护 Gtech UI Kit (Mob) 过程中一些思考与方法。今天我们先聊聊如何迈出组件">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gtechdigi.cn/favicon.ico">
+<meta property="article:published_time" content="2022-08-17T09:42:55.000Z">
+<meta property="article:modified_time" content="2023-05-19T10:04:50.069Z">
+<meta property="article:author" content="Gtechdigi">
+<meta property="article:tag" content="UI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gtechdigi.cn/favicon.ico"><link rel="shortcut icon" href="https://www.gtechdigi.cn/favicon.ico"><link rel="canonical" href="http://example.com/2022/08/17/Ui-Kit-1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '组件库设计(一) - 一个组件库的诞生',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-19 18:04:50'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://www.gtechdigi.cn/favicon.ico" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.gtechdigi.cn/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Gtech"><img class="site-icon" src="https://www.gtechdigi.cn/_nuxt/img/logo.ae1c073.png"/></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://www.gtechdigi.cn/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">组件库设计(一) - 一个组件库的诞生</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-17T09:42:55.000Z" title="发表于 2022-08-17 17:42:55">2022-08-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-19T10:04:50.069Z" title="更新于 2023-05-19 18:04:50">2023-05-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/UI/">UI</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="组件库设计(一) - 一个组件库的诞生"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><p>随着公司业务的不断增长，组件化除了为业务带来一致的设计语言和工作效率提升外，也为设计团队的产出和协作方式带来了影响和变化。Gtech UED团队在进行需求设计的同时，也逐步沉淀出一套适用于多平台、多业务的组件库，以此来提升设计和协同效率，并最终实现专业价值和商业价值的平衡。本系列文章中，我会分享自己在整理与维护 Gtech UI Kit (Mob) 过程中一些思考与方法。今天我们先聊聊如何迈出组件库设计的「第一步」。</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ffd98e953d9248d9ab12b64d7b2f2331~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817095924.png"></p>
+<h2 id="1-组件的本质是一种规则"><a href="#1-组件的本质是一种规则" class="headerlink" title="1 . 组件的本质是一种规则"></a>1 . 组件的本质是一种规则</h2><p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/890e705070f3489182b9d21d063fab8a~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817095954.png"></p>
+<p>从某种程度上讲，<strong>设计体系 (Design System) 便是这样一种「规则」</strong> - 诸如配色、文本、组件等一系列设计要素共同<strong>构成了标准化的体系，为设计师提供决策指引</strong>。而组件库作为设计体系的一部分，通过对典型样式的归纳和常用组件的封装，帮助设计师快速实现中&#x2F;高保真原型的设计。</p>
+<p>遵循这样的「规则」，除了能让设计流程得到有效加速，设计模式的复用性与一致性也将得到提升，使产品设计方案整体更具扩展性，更易于维护。</p>
+<h2 id="2-持续维护的意义"><a href="#2-持续维护的意义" class="headerlink" title="2 . 持续维护的意义"></a>2 . 持续维护的意义</h2><p>组件库项目实际上并不是埋头苦干一个周期之后交付的产品，而是通过长时间的业务需求迭代后，持续沉淀的一个产物。就像跑马拉松，从起点迈出第一步很简单，困难的是持之以恒地跑下去，并最终抵达终点。通常业务迭代和组件维护的Timeline并不会交错，每一个业务迭代周期都会调用当下版本的组件库作为基础模板；同样，每结束一个迭代周期，也会将期间复用性较高组件或样式定义更新到库中。久而久之对于日常工作项目当中的诸多需求，便可以通过轻松拖拽或少量改动快速搭建页面。</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5209025157e442bfa3b22ced377b28d5~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817100049.png"></p>
+<p>要实现快速搭建页面，组件库本身需要满足「合理性」，包括合理的结构、命名等等，而这些都需要在整理和维护的过程中不断思考和纠正。在实际的过程中，往往会在某一组件整理到中期时，才发觉似乎以另一种结构进行封装更合理，那么之前的成果可能都需要推翻或者修改；同时，组件库还应满足可复用、易用的要求，以满足日常业务的需要。设计师除了要学习通过使用组件来提高工作效率，更需要尝试了解封装、命名甚至维护的方式和流程，这样才能对组件的使用更加得心应手。</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e9078498950843589c098748e531103e~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817100318.png"></p>
+<h2 id="1-基础样式"><a href="#1-基础样式" class="headerlink" title="1 . 基础样式"></a>1 . 基础样式</h2><p>组件库是由组件所构成。而样式则是组件设计的基础，通过层级自下而上逐级的搭建。制作组件、模板、页面的过程中首当其冲便是全面、精细的对基础样式进行定义和维护，包括颜色、容器、字体、图层等…</p>
+<p>以“字体”为例，文字是构成界面信息与内容的基础元素之一，无论是在高保真设计阶段，或者对于交互设计师在制作的线稿、低保真原型阶段。通过不同的色彩、字号、字重等参数来构建界面整体与局部的信息展示，确保界面内容的层次和呼吸感，帮助用户更好的获取界面信息。</p>
+<p>针对系统级产品的通用场景， Gtech UI Kit (Mob) 针对单一文本提供了360种通用样式，其中样式的命名规则是基于文字的显性属性决定的，即「字体重量&#x2F;字号&#x2F;对齐方式&#x2F;颜色」，譬如「Regular&#x2F;14&#x2F;1_Left&#x2F;Grey 6」，所代表的就是常规字重、14号、左对齐、颜色定义为「Grey6」的文字。</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3ca6194f62ba406497ce8849c9f6b7fc~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817100411.png"></p>
+<p>当然，所有这些文字样式中，可能高频使用的并不多，但我们还是<strong>更希望在前期花费足够多的时间成本去定义一套统一的、足以应对绝大多数使用场景的样式表，增加后期维护组件库的容错，满足组件库的易用性。</strong></p>
+<h2 id="2-组件结构"><a href="#2-组件结构" class="headerlink" title="2 . 组件结构"></a>2 . 组件结构</h2><p>「结构清晰」作为组件定义的要求，也是考量组件库易用性的因素之一。如果组件库的最终目标是对外开源，那么在最初的整理和之后的维护中需要考虑的问题之一就是<br><code>「普适性」</code><strong>即探索一种对大多数团队、个人都能很好的适应和理解且便于索引和调用的组件归类方式</strong>。经过调研和内部讨论我们最终选择基于使用场景出发，将组件库划分为6个模块，并将每种典型组件分页进行展示，具体展示结构如下：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/686b7fd3c9f14ac5a40148a454b12a56~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817101659.png"></p>
+<p>当然，基于组件属性的分类也是一种常见的组织结构，Apple iOS UI或Google Material Design等系统级组件都是按照组件属性来划分，一切都是为了更方便的索引和调用。在设计上，只要能达到目的，通往目标的方法只要选择最合适的即可。</p>
+<h2 id="3-命名规则"><a href="#3-命名规则" class="headerlink" title="3 . 命名规则"></a>3 . 命名规则</h2><p>关于命名方式与规则，同样是整理和维护组件库过程中重要的环节之一。无论对于颜色、图层、文本样式的定义，还是组件、图标、典型界面的整理与组织，统一、通用、灵活的命名规则都是贯穿始终的基线。</p>
+<p>正如前文提到的，组件会基于使用场景进行划分，其中每一类包含若干组件，譬如「展示」场景当中的单元格、标签、徽标等，而每一个组件又是由若干状态、参数等所构成。</p>
+<p>层次分明的结构对于组件的命名有着一定的要求，一方面需要使维护过程更加井然有序、条理清晰，一方面要确保最终产出的组件便于索引和调用。通常为了体现结构层次，我们在组件命名当中使用「&#x2F;」符号来分隔类别场景、组件、状态或其它参数等 (Sketch 可以自动识别「&#x2F;」符号，并以此作为类别分隔标志来逐层组织，最终形成完整的目录结构) ，譬如下图「展示 &#x2F; 标签 &#x2F; 圆形标签 &#x2F; 小标签」等等。只要使用者在调用时知道自己需要怎样的组件，便能很轻松的逐层索引。</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4f70fe8cb88e4b6c90786a3709358861~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817101846.png"></p>
+<p>与组件结构一样，关于命名并没有一套所谓「最正确」的规则。<strong>最正确的规则就在团队进行充分讨论且符合大多数人的使用习惯并最终<code>达成共识</code>。</strong></p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e624ae8920c74ca187d5be729ef26760~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817102049.png"></p>
+<h2 id="1-插件推荐"><a href="#1-插件推荐" class="headerlink" title="1 . 插件推荐"></a>1 . 插件推荐</h2><p>「工欲善其事，必先利其器」随着工作内容的不断丰富，很多操作靠设计师手动实现往往难度较大，且较为繁琐；在Sketch的社区内不仅有众多的设计师，而且也还有活跃的开发者社群。开发者们提供了许多优秀的插件，从不同的角度完善了 Sketch的功能，提高了设计师的工作效率。在进行组件的整理和维护时，我通常使用以下两个插件：</p>
+<ul>
+<li><strong>Find and Replace Text</strong> 用于对选中的图层、画板、页面设置整个Sketch文件内的文本内容进行查找并批量替换-无论是图层内实际的文本内容或者是图层列表当中的文本名称均可；在尝试命名规则的过程中，我们会通过这款插件批量修改基础样式定义中所呈现的文字风格名称。</li>
+</ul>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9815322596da4001868190d23e7baa73~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817103448.gif"></p>
+<ul>
+<li><strong>Styles Generator</strong> 用于批量且自动化定义文本、图层样式。在确定了命名规则，并完成了初始的样式或字体属性设置后，选中所有范例对象，执行「Generate Shared Styles」，Sketch 便能根据你所选中的对象的图层名称来自动生成对应的 Styles，无需任何手动命名的过程。</li>
+</ul>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06febfb428484122a0e54dedc44c59f0~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817103452.gif"></p>
+<h2 id="2-协同方案"><a href="#2-协同方案" class="headerlink" title="2 . 协同方案"></a>2 . 协同方案</h2><p>前面说到，组件库的整理和维护是一个随着业务需求不断迭代更新的工作，及时迭代优化才能让组件更好地满足当下项目的需要。在内部，我们通过对存在的问题进行思考并尝试寻找一种最优的方式，让团队轻松地做到高效协同。</p>
+<p>最终，我们决定将组件维护的工作流程「上云」，即在云端进行设计协同工作；简单来说，这种工作方式是将组件库Sketch文件放在云端，通过云帐号的能力使得大家可以同时共享并使用这份文件。文件内会包含设计规范说明、组件、典型页面等。设计师在工作时可以直接调用这些内容。具体操作如下:</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b7025cf6339144428b0a51b109259c3b~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817102603.png"></p>
+<ol>
+<li>将组件库Sketch文件通过iCloud云盘分享给团队设计师 (可以根据团队的需要来设置相应的编辑、查看权限) ；</li>
+<li>被分享的小伙伴们的云盘内出现该组件库文件，可将其添加至 <strong>Sketch Library</strong>；</li>
+<li>即可以通过 Symbol 在项目文件中引用组件；</li>
+<li>每当团队内对组件进行更新时右上角会出现「Library Update」推送，选择更新的组件即可。</li>
+</ol>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/90e68efe06ca4865915603fa3d49a7b4~tplv-k3u1fbpfcp-watermark.image" alt="微信图片_20220817102643.png"></p>
+<p>相信很多小伙伴也尝试整理出一套标准的组件规范，希望以此提高设计效率和确保产出一致。但在实际工作中会面临一些问题：除了自己或设计团队在使用组件外，似乎前端页面并没有达到组件化后的效果，不同的开发依然会对每个组件重新写一遍代码，没有效率的同时视觉还原度也比较差。</p>
+<p>出现这种情况主要的原因在于：在开发层面没有实现代码化，组件仅仅只是一张设计稿，并不是真实可调用的「积木」。</p>
+<p>所以维护组件绝不单单仅靠设计师，开发也应作为主要参与者之一。需要二者通过多次的沟通、校对和持续开发维护 (此处省略诸多协同的过程，事实上，团队排期的协调是一个十分重要的因素) 。而最终我们输出的应该是一套可视产物和其背后的实现代码，能够真正地在代码层面实现拖拽组件搭建界面的目标。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>在本篇文章里，我们主要聊了「关于如何进行组件库设计」的一些常见问题，例如整理维护组件库的必要设定、插件和协同方案的推荐、以及组件代码化等等，希望能够对各位的工作带来一些思考和帮助。</p>
+<h2 id="预告"><a href="#预告" class="headerlink" title="预告"></a>预告</h2><p>下一篇文章-组件库设计（二），我将继续以Gtech UI Kit (Mob) 项目为例，聊聊我对组件设计中常见的辩证问题-关于复用性与易用性的思考。</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>本文最初由<code>麻Lee酥</code>发布在 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/9S5pp1W2CSBGaX1Cz11xcQ">Gtech UED</a>微信公众号。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Gtechdigi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/08/17/Ui-Kit-1/">http://example.com/2022/08/17/Ui-Kit-1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Gtech</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/UI/">UI</a></div><div class="post_share"><div class="social-share" data-image="https://www.gtechdigi.cn/favicon.ico" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/08/29/Sonic/" title="Sonic设备管理平台使用分享"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Sonic设备管理平台使用分享</div></div></a></div><div class="next-post pull-right"><a href="/2022/08/04/Flutter-Practice/" title="Flutter项目架构实践：基于蒲公英API的团队App下载安装器"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Flutter项目架构实践：基于蒲公英API的团队App下载安装器</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/04/07/Jetpack-Compose/" title="Jetpack Compose初体验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-04-07</div><div class="title">Jetpack Compose初体验</div></div></a></div><div><a href="/2022/02/28/UI-ID/" title="浅谈印尼本地化产品的用户体验设计（一）- 探索印尼"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-28</div><div class="title">浅谈印尼本地化产品的用户体验设计（一）- 探索印尼</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://www.gtechdigi.cn/favicon.ico" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gtechdigi</div><div class="author-info__description">以消费者为中心，以技术为驱动，满足多行业数字化融合需求。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/GTechdigi"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GTechdigi" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%BB%84%E4%BB%B6%E7%9A%84%E6%9C%AC%E8%B4%A8%E6%98%AF%E4%B8%80%E7%A7%8D%E8%A7%84%E5%88%99"><span class="toc-number">1.</span> <span class="toc-text">1 . 组件的本质是一种规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%8C%81%E7%BB%AD%E7%BB%B4%E6%8A%A4%E7%9A%84%E6%84%8F%E4%B9%89"><span class="toc-number">2.</span> <span class="toc-text">2 . 持续维护的意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E6%A0%B7%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">1 . 基础样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%BB%84%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">2 . 组件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="toc-number">5.</span> <span class="toc-text">3 . 命名规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90"><span class="toc-number">6.</span> <span class="toc-text">1 . 插件推荐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%8F%E5%90%8C%E6%96%B9%E6%A1%88"><span class="toc-number">7.</span> <span class="toc-text">2 . 协同方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E5%91%8A"><span class="toc-number">9.</span> <span class="toc-text">预告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">引用</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/05/10/OpenTelemetry-javaagent/" title="OpenTelemetry javaagent 类加载器">OpenTelemetry javaagent 类加载器</a><time datetime="2023-05-10T09:56:17.000Z" title="发表于 2023-05-10 17:56:17">2023-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/07/Jetpack-Compose/" title="Jetpack Compose初体验">Jetpack Compose初体验</a><time datetime="2023-04-07T09:55:11.000Z" title="发表于 2023-04-07 17:55:11">2023-04-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/31/FlutterBoost-in-IOS/" title="iOS工程调用Flutter篇（FlutterBoost框架）">iOS工程调用Flutter篇（FlutterBoost框架）</a><time datetime="2023-03-31T09:54:07.000Z" title="发表于 2023-03-31 17:54:07">2023-03-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/30/Flutter-in-IOS/" title="iOS工程内嵌Flutter篇">iOS工程内嵌Flutter篇</a><time datetime="2023-03-30T09:53:21.000Z" title="发表于 2023-03-30 17:53:21">2023-03-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/30/FlutterBoost-in-Android/" title="Android工程调用Flutter篇（FlutterBoost框架）">Android工程调用Flutter篇（FlutterBoost框架）</a><time datetime="2023-03-30T09:52:14.000Z" title="发表于 2023-03-30 17:52:14">2023-03-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Gtechdigi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
